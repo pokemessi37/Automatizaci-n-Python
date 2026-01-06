@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Automático de Ventas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Reporte Automático de Ventas</h1>
+
+    <div class="section">
+        <form action="/procesar" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".csv" required>
+            <br><br>
+            <button type="submit">Generar Reporte</button>
+        </form>
+        
+    </div>
+
+    {% if mensaje %}
+        <div class="alert alert-success">
+            {{ mensaje }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+    {% endif %}
+
+    {% if procesado %}
+    <div class="section downloads">
+        <h3>Descargar archivos</h3>
+        <a href="/descargar/csv">📄 Descargar CSV limpio</a>
+        <a href="/descargar/word">📝 Descargar Reporte Word</a>
+    </div>
+    {% endif %}
+    
+</div>
+
+</body>
+</html>
